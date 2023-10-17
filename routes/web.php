@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/movie/{id}', [DetailController::class, 'index']);
+Route::get('/upcoming', function () {
+    return $upcoming = Movie::getUpcoming();
+});
+
+Route::get('/cities', function () {
+    $cities = Movie::getCities();
+    return $cities;
+});
+
+Route::get('/theater/', [TheaterController::class, 'index']);
+
+Route::get('/schedules/{theater}', function ($theater) {
+    $schedules = Movie::getSchedules($theater);
+    return $schedules;
+});
+
+Route::get('/schedules/{theater}/{id}', function ($theater, $id) {
+    $schedules = Movie::getSchedulesDetail($theater, $id);
+    return $schedules;
 });
