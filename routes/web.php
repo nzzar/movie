@@ -4,6 +4,8 @@ use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +21,12 @@ use App\Http\Controllers\DetailController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/movie/{id}', [DetailController::class, 'index']);
 Route::get('/upcoming', function () {
-    return $upcoming = Movie::getUpcoming();
+    $upcoming = Movie::getUpcoming();
+    return view('page.upcoming', [
+        'title' => 'upcoming',
+        'active' => 'upcoming',
+        'posts' => $upcoming
+    ]);
 });
 
 Route::get('/cities', function () {
@@ -38,3 +45,6 @@ Route::get('/schedules/{theater}/{id}', function ($theater, $id) {
     $schedules = Movie::getSchedulesDetail($theater, $id);
     return $schedules;
 });
+
+Route::post('search', [AjaxController::class, 'ajaxSearch'])->name('search');
+Route::get('search', [SearchController::class, 'index']);

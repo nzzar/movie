@@ -4,3 +4,83 @@ body {
     background-color: #0c111b;
     font-family: 'Poppins', sans-serif;
 }
+
+nav .container {
+    flex-direction: row;
+}
+.navbar {
+    background-color: #121926;
+}
+.nav-link {
+    font-weight: 400;
+}
+
+.navbar-brand h3 {
+    font-family: 'Zen Dots';
+    color: #ffffff;
+    text-shadow: 0px 0px 10px rgba(0, 162, 255);
+}
+
+nav {
+    box-shadow: 0px 4px 6px -1px rgba(60, 56, 56, 0.3);
+    z-index: 9999;
+}
+
+.card img {
+    height: 260px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card {
+    width: 220px;
+    height: 320px;
+}
+
+.card:hover {
+    box-shadow: rgba(226, 226, 230, 0.2) 0px 7px 29px 0px;
+}
+
+.card a {
+    box-shadow: 0px 1px 8px 1px rgba(255, 255, 255, 0.548);
+}
+
+.card-title {
+    text-decoration: none;
+}
+
+footer {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    color: white;
+    background-color: #121926;
+    text-align: center;
+}
+
+.table {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.bg-grey {
+    background-color: rgb(54, 53, 53);
+    padding: 4px 6px;
+    border-radius: 5px;
+}
+
+.trailer {
+    color: azure;
+    background-color: rgb(54, 53, 53);
+    padding: 4px 6px;
+    border-radius: 5px;
+}
+
+.trailer:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(72, 66, 66);
+}
+
+.detail-img:hover img {
+    box-shadow: rgba(217, 214, 214, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
