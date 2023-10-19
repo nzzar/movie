@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,8 @@ Route::get('/schedules/{theater}/{id}', function ($theater, $id) {
 
 Route::post('search', [AjaxController::class, 'ajaxSearch'])->name('search');
 Route::get('search', [SearchController::class, 'index']);
+
+Route::get('/order', [OrderController::class, 'index']);
+Route::post('/pay', [OrderController::class, 'insertData']);
+Route::post('/payment', [OrderController::class, 'order']);
+Route::post('/payment', [OrderController::class, 'order']);

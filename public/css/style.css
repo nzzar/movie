@@ -84,3 +84,68 @@ footer {
 .detail-img:hover img {
     box-shadow: rgba(217, 214, 214, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
+
+.order {
+    background-color: #121926;
+    box-shadow: rgba(22, 22, 24, 0.2) 0px 7px 29px 0px;
+}
+
+.dropdown ul li {
+    border-bottom: 1px solid; border-color: #99989869;
+}
+
+.dropdown ul li:hover {
+    background-color: rgba(153, 182, 241, 0.521);
+    cursor: pointer;
+}
+
+.dropdown ul li img {
+    width: 50px;
+    padding: 10px;
+}
+
+li {
+    list-style: none;
+}
+
+#schedules span {
+    padding: 2px 4px;
+    margin-right: 3px;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+}
+
+#schedules span i {
+    margin-right: 3px;
+}
+
+#schedules span:hover {
+    background-color: #4e6eaa;
+}
+
+.list-item-sc:hover, .list-item-time:hover {
+    cursor: pointer;
+    background-color: #172132;
+}
+
+.tiket span {
+    padding: 2px 4px;
+    cursor: pointer;
+}
+
+.tiket span:hover {
+    background-color: #4e6eaa;
+}
+
+.show-seat span {
+    text-align: center;
+    display: inline-block;
+    width: 30px;
+    cursor: pointer;
+}
+
+.metode img {
+    background-color: white;
+    box-shadow: rgba(193, 193, 220, 0.2) 0px 7px 29px 0px;
+}
