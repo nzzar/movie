@@ -24,4 +24,20 @@ class OrderAjaxController extends Controller
         $schedules = Movie::getSchedules($request->theater);
         return $schedules;
     }
+
+    public function schedulesDetails(Request $request)
+    {
+        $schedules = Movie::getSchedulesDetail($request->theater_id, $request->movie_id);
+        return $schedules;
+    }
+
+    // public function pendingPayment(Request $request)
+    // {
+    //     return Payment::pending($request);
+    // }
+
+    // public function successPayment(Request $request)
+    // {
+    //     return Payment::success($request);
+    // }
 }

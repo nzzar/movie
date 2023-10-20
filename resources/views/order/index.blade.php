@@ -300,6 +300,192 @@
                 })
                 $('.dropdown').removeClass( "invisible" );
             });
+
+            $(document).on("click", ".opt-movie" , function() {
+                var textMovie = $(this).find('span').text();
+                $('#movie').val($(this).find('span').text())
+                $(".label-tiket").text(textMovie);
+                var theater = $('#theater').find('option:selected').attr('id');
+                var movie = $(this).attr('id')
+                $('input[name=id_movie]').val(movie)
+    
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('order.schedules.details') }}",
+                    data: { theater_id: theater, movie_id: movie, _token: '{{csrf_token()}}' },
+                    success: function (data) {
+                        var dateDta = data.playTime[0].date;
+                        var strDate = dateDta.split('2022').join('2022 ')
+                        var word = strDate.split(' ')
+
+                        $("#list-date").empty();
+    
+                        $.each(word, function(index, value){
+                            if(index != word.length) {
+                                $("#list-date").append("<li class='list-item-sc'>"+value+"</li>")
+                               
+                            }
+                        })
+                        $('input[name=date]').val(word[0])
+                        var txtdefault = $(".text-date p");
+                        txtdefault.text(word[0]);
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        console.log(data);
+                    },
+                });
+                
+                $('.dropdown').addClass( "invisible" );
+            });
+
+            $('#time').change(function(){
+                var option = $(this).find('option:selected');
+                var text = option.text();
+                var price = $("#price p");
+                var jml_tiket = $('#jml_tiket');
+                var value = parseInt(jml_tiket.val())
+                switch (text) {
+                    case "12:30":
+                        price.text("35.000")
+                        $('input[name=price]').val("35.000");
+                        break;
+                    case "13:00":
+                        price.text("35.000")
+                        $('input[name=price]').val("35.000");
+                        break;
+                    case "15:40":
+                        price.text("35.000")
+                        $('input[name=price]').val("35.000");
+                        break;
+                    case "16:10":
+                        price.text("40.000")
+                        $('input[name=price]').val("40.000");
+                        break;
+                    case "16:40":
+                        price.text("40.000")
+                        $('input[name=price]').val("40.000");
+                        break;
+                    case "19:10":
+                        price.text("45.000")
+                        $('input[name=price]').val("45.000");
+                        break;
+                    case "20:20":
+                        price.text("45.000")
+                        $('input[name=price]').val("45.000");
+                        break;
+                    default:
+                        price.text("35.000");
+                        $('input[name=price]').val("35.000");
+                }
+
+                var textPrice = price.text().split('.').join('');
+                var priceTotal = parseFloat(textPrice) * value;
+                
+                $(".price-t").text(numberWithCommas(priceTotal)) 
+                var ppn = (priceTotal / 100) * 11;
+                $('.ppn').text(numberWithCommas(ppn)) 
+
+                var totalBayar = priceTotal + ppn;
+                $('.price-total').text(numberWithCommas(totalBayar))
+                $('input[name=total_price]').val(totalBayar)
+            });
+
+            $("#jadwal span").on('click', function() {
+                var txtdefault = $(".text-date p");
+                var dropdown = $('.dropdown-sc');
+                var lifirst = $("#list-date li").first().text()
+
+                if(dropdown.hasClass("invisible")) {
+                    txtdefault.text("")
+                } else {
+                    txtdefault.text(lifirst)
+                }
+                $('.dropdown-sc').toggleClass( "invisible" );
+            })
+            $("time span").on('click', function(){
+                $('.dropdown-time').toggleClass( "invisible" );
+            })
+
+            $("#kurang").on('click', function(){
+                var jml_tiket = $('#jml_tiket');
+                var value = parseInt(jml_tiket.val())
+                var classrm = ".id-ch" + jml_tiket.val();
+                var seat = $("#seat");
+                var price = $("#price p");
+                if(value > 0) {
+                    value--
+                    jml_tiket.val(value)
+                    seat.children('input').last().remove()
+                    
+                    var textPrice = price.text().split('.').join('');
+                    var priceTotal = parseFloat(textPrice) * value;
+                    
+                    $(".price-t").text(numberWithCommas(priceTotal)) 
+                    var ppn = (priceTotal / 100) * 11;
+                    $('.ppn').text(numberWithCommas(ppn)) 
+
+                    var totalBayar = priceTotal + ppn;
+                    $('.price-total').text(numberWithCommas(totalBayar))
+                    $('input[name=total_price]').val(totalBayar)
+                }
+            });
+
+            $("#tambah").on('click', function(){
+                var jml_tiket = $('#jml_tiket');
+                var value = parseInt(jml_tiket.val());
+                var price = $("#price p");
+                var seat = $("#seat");
+                var time = $("#time").find('option:selected').text()
+
+                if(time == "12:30") {
+                    price.text("35.000")
+                    $('input[name=price]').val("35.000");
+                } 
+                
+                value++
+                jml_tiket.val(value)
+                $(".jml-tiket").text(value)
+
+                var textPrice = price.text().split('.').join('');
+
+                var priceTotal = parseFloat(textPrice) * value;
+                $(".price-t").text(numberWithCommas(priceTotal)) 
+
+                var ppn = (priceTotal / 100) * 11;
+                $('.ppn').text(numberWithCommas(ppn)) 
+
+                var totalBayar = priceTotal + ppn;
+                $('.price-total').text(numberWithCommas(totalBayar))
+                $('input[name=total_price]').val(totalBayar)
+
+                var lengtseat = seat.children('input').length;
+
+                if(lengtseat < jml_tiket.val()) {
+                    seat.append("<input type='text' class='text-white' name='seat[]' style='width: 30px; background-color:transparent; border: none;' value='A"+jml_tiket.val()+"' readonly='readonly'>");
+                }
+            });
+
+            $(".show-seat span").on('click', function(){
+                var seat = $("#seat");
+                var jml_tiket = $('#jml_tiket').val();
+                var lengtseat = seat.children('input').length;
+
+                if(lengtseat < jml_tiket) {
+                    seat.append("<input type='text' class='text-white' name='seat[]' style='width: 30px; background-color:transparent; border: none;' value='"+$(this).text()+"' readonly='readonly'>")
+                } else {
+                    seat.children('input').last().val($(this).text());
+                }
+            })
+
+            $('#btn-bayar').on('click', function(){
+                $("#submitform").click()
+            })
+            $(document).on('click', ".list-item-sc", function(){
+                var txtdefault = $(".text-date p");
+                txtdefault.text($(this).text());
+                $('input[name=date]').val($(this).text());
+                $('.dropdwn-sc').addClass( "invisible" );
+            });
         });
     </script>
 @endsection
