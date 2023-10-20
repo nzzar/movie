@@ -240,15 +240,66 @@
                     url: "{{ route('order.cities') }}",
                     data: {cityid: $city_id, _token: '{{csrf_token()}}'},
                     success: function (data) {
+                        $('#type').empty();
+                        $('#type').append("<option>Type</option>")
                         $.each(data, function(index, value){
                             $('#type').append("<option id="+value+" value="+value+">"+value+"</option>");
                         })
-                    }
+                    },
                     error: function (data, textStatus, errorThrown) {
                         console.log(data);
                     },
                 })
-            })
-        })
+            }).trigger('change');
+            $('#type').change(function() {
+                var option = $(this).find('option:selected');
+                var value = option.val();
+                var id = $('#cities').find('option:selected').attr('id');
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('order.theaters') }}",
+                    data: { type: value, city_id: id, _token: '{{csrf_token()}}' },
+                    success: function (data) {
+                        $('#theater').empty();
+                        $('#theater').append("<option>Theater</option>")
+                        $.each(data, function(index, value) {
+                            var nama = value.name;
+                            $('#theater').append("<option id="+value.id+" >"+value.name+"</option>");
+                            $("#"+value.id).attr('value', value.name);
+                        })
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        console.log(data);
+                    },
+                });
+            });
+            $('#theater').change(function() {
+                var option = $(this).find('option:selected');
+                var theater_id = option.attr("id");
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('order.schedules')}}",
+                    data: {theater: theater_id, _token: '{{csrf_token()}}'},
+                    success: function(data){
+                        $('#list-movie').empty();
+                        $.each(data.schedules, function(index, value){
+                            $('#list-movie').append("<li id="+value.movie.id+" class='opt-movie'><img src="+value.movie.bannerUrl+" alt='' width='30px' class='mr-3'><span class='my-auto'>"+value.movie.title+"</span></li>")
+                        })
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        console.log(data);
+                    },
+                })
+            });
+            $("#movie").bind("keypress click", function(){
+                var value = $(this).val().toLowerCase();
+                $('#list-movie li').filter(function(){
+                    $(this).toggle($(this).find('span').text().toLowerCase().indexOf(value) > -1)
+                })
+                $('.dropdown').removeClass( "invisible" );
+            });
+        });
     </script>
 @endsection

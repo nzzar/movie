@@ -7,6 +7,7 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderAjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,12 @@ Route::get('/order', [OrderController::class, 'index']);
 Route::post('/pay', [OrderController::class, 'insertData']);
 Route::post('/payment', [OrderController::class, 'order']);
 Route::post('/payment', [OrderController::class, 'order']);
+
+Route::controller(OrderAjaxController::class)->group(function () {
+    Route::post('order-ajax-cities', 'cities')->name('order.cities');
+    Route::post('order-ajax-pending-payment', 'pendingPayment')->name('order.pending.payment');
+    Route::post('order-ajax-success-payment', 'successPayment')->name('order.success.payment');
+    Route::post('order-ajax-theaters', 'theaters')->name('order.theaters');
+    Route::post('order-ajax-schedules', 'schedules')->name('order.schedules');
+    Route::post('order-ajax-schedules-details', 'schedulesDetails')->name('order.schedules.details');
+});
