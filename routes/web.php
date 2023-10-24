@@ -54,7 +54,7 @@ Route::get('search', [SearchController::class, 'index']);
 Route::get('/order', [OrderController::class, 'index']);
 Route::post('/pay', [OrderController::class, 'insertData']);
 Route::post('/payment', [OrderController::class, 'order']);
-Route::post('/payment', [OrderController::class, 'order']);
+Route::get('/payment', [OrderController::class, 'order']);
 
 Route::controller(OrderAjaxController::class)->group(function () {
     Route::post('order-ajax-cities', 'cities')->name('order.cities');

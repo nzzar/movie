@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\Payment;
 
 class OrderAjaxController extends Controller
 {
@@ -31,13 +32,13 @@ class OrderAjaxController extends Controller
         return $schedules;
     }
 
-    // public function pendingPayment(Request $request)
-    // {
-    //     return Payment::pending($request);
-    // }
+    public function pendingPayment(Request $request)
+    {
+        return Payment::pending($request);
+    }
 
-    // public function successPayment(Request $request)
-    // {
-    //     return Payment::success($request);
-    // }
+    public function successPayment(Request $request)
+    {
+        return Payment::success($request);
+    }
 }

@@ -43,6 +43,7 @@ class OrderController extends Controller
         $validatedData['snap_token'] = $snapToken;
         $validatedData['payment_id'] = $order_id;
         $validatedData['seat_id'] = $order_id;
+        $validatedData['user_id'] = 1;
 
         $id = Order::find($order_id);
 
