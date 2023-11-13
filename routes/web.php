@@ -8,6 +8,8 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderAjaxController;
+use App\Http\Controllers\TheaterController;
+use App\Http\Controllers\TheatersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,7 @@ Route::get('/cities', function () {
     return $cities;
 });
 
-Route::get('/theater/', [TheaterController::class, 'index']);
+Route::get('/theater/', [TheatersController::class, 'theater']);
 
 Route::get('/schedules/{theater}', function ($theater) {
     $schedules = Movie::getSchedules($theater);
