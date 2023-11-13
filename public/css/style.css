@@ -32,16 +32,16 @@ nav {
     object-position: center;
 }
 
-.card {
+.card-movie {
     width: 220px;
     height: 320px;
 }
 
-.card:hover {
+.card-movie:hover {
     box-shadow: rgba(226, 226, 230, 0.2) 0px 7px 29px 0px;
 }
 
-.card a {
+.card-movie a {
     box-shadow: 0px 1px 8px 1px rgba(255, 255, 255, 0.548);
 }
 
@@ -148,4 +148,15 @@ li {
 .metode img {
     background-color: white;
     box-shadow: rgba(193, 193, 220, 0.2) 0px 7px 29px 0px;
+}
+
+.text-login {
+    font-family: 'Impact';
+    color: #ffffff;
+}
+
+.card-login {
+    box-shadow: 10px 10px 5px 0px rgba(230,230,230,0.75);
+-webkit-box-shadow: 10px 10px 5px 0px rgba(230,230,230,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(230,230,230,0.75);
 }

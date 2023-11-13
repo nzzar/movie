@@ -2,6 +2,7 @@
 
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AjaxController;
@@ -21,6 +22,9 @@ use App\Http\Controllers\TheatersController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'authenticate']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/movie/{id}', [DetailController::class, 'index']);

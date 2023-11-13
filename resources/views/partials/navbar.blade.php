@@ -52,7 +52,7 @@
             </li>
             @else 
             <li class="nav-item">
-                <a class="nav-link {{ ($active === "login") ? 'active' : ''}} fs-5" aria-current="page" href="/login"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                <a class="nav-link {{ ($active === "login") ? 'active' : ''}} fs-5" aria-current="page" href="{{ url('login') }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
             </li>   
             @endauth
         </ul>
