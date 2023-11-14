@@ -23,6 +23,12 @@ use App\Http\Controllers\TheatersController;
 |
 */
 
+Route::get('admin', function () {
+    return view('admin.admin');
+});
+
+Route::view('akun', 'akun.tampil_akun');
+
 Route::get('login', [AuthController::class, 'login']);
 Route::post('login', [AuthController::class, 'authenticate']);
 Route::get('logout', [AuthController::class, 'logout']);
