@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Movie;
 use Faker\Factory as Faker;
 use App\Models\Order;
@@ -14,11 +16,15 @@ class OrderController extends Controller
 {
     public function index()
     {
+        if(!Auth::check()){
+            return redirect('login');
+        } 
         return view('order.index', [
             'title' => 'Pembayaran',
             'active' => 'order',
             "cities" => Movie::getCities(),
         ]);
+
     }
 
     public function insertData (Request $request)

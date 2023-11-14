@@ -8,6 +8,7 @@ use App\Models\Payment;
 
 class OrderAjaxController extends Controller
 {
+
     public function cities(Request $request)
     {
         $type = Movie::getTheaters($request->cityid)->keys(0);
