@@ -2,6 +2,7 @@
 
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
@@ -27,7 +28,10 @@ Route::get('admin', function () {
     return view('admin.admin');
 });
 
-Route::view('akun', 'akun.tampil_akun');
+Route::get('akun', [AdminController::class, 'user']); 
+Route::get('theaters', [AdminController::class, 'theaters']); 
+Route::get('orders', [AdminController::class, 'orders']);
+
 
 Route::get('login', [AuthController::class, 'login']);
 Route::post('login', [AuthController::class, 'authenticate']);

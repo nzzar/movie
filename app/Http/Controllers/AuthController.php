@@ -12,6 +12,13 @@ use Session;
 
 class AuthController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('akun.tampil_akun', ['users' => $users]);
+    }
+
+
     public function login()
     {
         return view('auth.login', [
