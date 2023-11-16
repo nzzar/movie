@@ -21,6 +21,7 @@ class AuthController extends Controller
 
     public function login()
     {
+        // if(Auth::check())
         return view('auth.login', [
             "title" => "Nobar 21",
             "active" => 'login'

@@ -1,7 +1,7 @@
 @extends('admin.admin')
 
 @section('judul_konten')
-Data Akun
+Data Order
 @endsection
 
 @section('main')

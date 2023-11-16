@@ -2,6 +2,7 @@
 
 use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -24,13 +25,18 @@ use App\Http\Controllers\TheatersController;
 |
 */
 
-Route::get('admin', function () {
-    return view('admin.admin');
+Route::prefix('admin')
+    ->middleware(['admin'])
+    ->group( function () {
+    Route::get('akun', [AdminController::class, 'user']); 
+    Route::delete('akun/{id}', [AdminController::class, 'destroy'])->name('akun.destroy'); 
+    Route::get('theaters', [AdminController::class, 'theaters']); 
+    Route::get('orders', [AdminController::class, 'orders']);
+    Route::get('/', [AdminController::class, 'index']);
+
 });
 
-Route::get('akun', [AdminController::class, 'user']); 
-Route::get('theaters', [AdminController::class, 'theaters']); 
-Route::get('orders', [AdminController::class, 'orders']);
+
 
 
 Route::get('login', [AuthController::class, 'login']);
@@ -83,3 +89,6 @@ Route::controller(OrderAjaxController::class)->group(function () {
     Route::post('order-ajax-schedules', 'schedules')->name('order.schedules');
     Route::post('order-ajax-schedules-details', 'schedulesDetails')->name('order.schedules.details');
 });
+
+// Auth::routes(['verify' => true]);
+// require __DIR__.'/auth.php';
